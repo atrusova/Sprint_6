@@ -2,7 +2,6 @@ import allure
 import pytest
 from pages.main_page import MainPage
 from data import AnswerText
-from locators.main_page_locators import MainPageLocators
 from conftest import driver
 
 
@@ -34,7 +33,7 @@ class TestMainPage:
     @allure.title(f'Проверка вопроса и получения текста ответа на главной в блоке FAQ')
     def test_question_and_answer(self, driver, num, result):
         main_page = MainPage(driver)
-        main_page.find_element_with_wait(MainPageLocators.SCOOTER_IMAGE)
-        main_page.scroll_to_element(MainPageLocators.LAST_ELEMENT_IN_PAGE_TO_SCROLL)
+        main_page.find_logo_with_wait()
         main_page.allow_cookie()
+        main_page.scroll_to_last_element_in_page()
         assert main_page.click_question_get_answer(num) == result

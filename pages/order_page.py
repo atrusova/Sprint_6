@@ -1,13 +1,12 @@
 import allure
 from pages.base_page import BasePage
 from locators.order_page_locators import OrderPageLocators
-from helpers import generate_order_info
 
 
 class OrderPage(BasePage):
 
-    @allure.step('Заполнение полей заказа, переход на вторую страницу заказа, заполнение полей, завершение заказа')
-    def set_order(self, order_info_dict):
+    @allure.step('Заполнение полей заказа, переход на вторую страницу заказа')
+    def set_order_first_page(self, order_info_dict):
         self.click_to_element(OrderPageLocators.NAME_INPUT)
         self.add_text_to_element(OrderPageLocators.NAME_INPUT, order_info_dict['name'])
         self.click_to_element(OrderPageLocators.SURNAME_INPUT)
@@ -20,6 +19,9 @@ class OrderPage(BasePage):
         self.click_to_element(OrderPageLocators.PHONE)
         self.add_text_to_element(OrderPageLocators.PHONE, order_info_dict['phone'])
         self.click_to_element(OrderPageLocators.NEXT_TO_ORDER_BUTTON)
+
+    @allure.step('Заполнение полей на второй странице, завершение заказа')
+    def set_order_last_page(self, order_info_dict):
         self.click_to_element(OrderPageLocators.TIME_TO_DELIVERY_CALENDAR)
         self.click_to_element(OrderPageLocators.CHOOSE_DAY_BRING_SCOOTER)
         self.click_to_element(OrderPageLocators.RENT_TIME_DROPDOWN)
@@ -36,4 +38,3 @@ class OrderPage(BasePage):
     def reformat_metro_locator(self, order_dict_info):
         locator_x_formatted = self.format_locators(OrderPageLocators.METRO_LOCATOR, order_dict_info['metro'])
         return locator_x_formatted
-

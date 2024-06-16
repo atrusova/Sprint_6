@@ -1,6 +1,3 @@
-import pytest
-import options
-from selenium import webdriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from locators.main_page_locators import MainPageLocators
@@ -38,3 +35,7 @@ class BasePage:
 
     def allow_cookie(self):
         self.click_to_element(MainPageLocators.COOKIE_BUTTON)
+
+    def switch_to_next_browser_tab(self):
+        tabs = self.driver.window_handles
+        self.driver.switch_to.window(tabs[1])
